@@ -109,7 +109,7 @@ const AboutSection = () => {
   return <section id="about" className="py-20 bg-white relative overflow-x-hidden">
       {/* Animated Tilted Images */}
       <motion.img
-        src="/public/Assets/interior.jpg"
+        src="/Assets/interior.jpg"
         alt="Aesthetic Left"
         initial={{ opacity: 0, x: -100, rotate: -15 }}
         whileInView={{ opacity: 1, x: 0, rotate: -15 }}
@@ -119,7 +119,7 @@ const AboutSection = () => {
         style={{ borderColor: '#22d3ee' }}
       />
       <motion.img
-        src="/public/Assets/house.png"
+        src="/Assets/house.png"
         alt="Aesthetic Right"
         initial={{ opacity: 0, x: 100, rotate: 15 }}
         whileInView={{ opacity: 1, x: 0, rotate: 15 }}
