@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Users, Target, Eye, Heart, Shield, Star, Sun, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
+
 const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('about');
   const tabs = [{
@@ -104,7 +106,28 @@ const AboutSection = () => {
         return null;
     }
   };
-  return <section id="about" className="py-20 bg-white">
+  return <section id="about" className="py-20 bg-white relative overflow-x-hidden">
+      {/* Animated Tilted Images */}
+      <motion.img
+        src="/public/Assets/interior.jpg"
+        alt="Aesthetic Left"
+        initial={{ opacity: 0, x: -100, rotate: -15 }}
+        whileInView={{ opacity: 1, x: 0, rotate: -15 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="hidden md:block absolute left-0 top-10 w-56 h-56 object-cover rounded-2xl border-4 border-white shadow-xl z-0"
+        style={{ borderColor: '#22d3ee' }}
+      />
+      <motion.img
+        src="/public/Assets/house.png"
+        alt="Aesthetic Right"
+        initial={{ opacity: 0, x: 100, rotate: 15 }}
+        whileInView={{ opacity: 1, x: 0, rotate: 15 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="hidden md:block absolute right-0 top-10 w-56 h-56 object-cover rounded-2xl border-4 border-white shadow-xl z-0"
+        style={{ borderColor: '#f472b6' }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 font-montserrat mb-4">
@@ -117,7 +140,7 @@ const AboutSection = () => {
 
         {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {tabs.map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center px-8 py-4 rounded-full font-montserrat text-xl font-semibold transition-all duration-300 ${activeTab === tab.id ? 'bg-corporate-blue text-white shadow-lg transform scale-105' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+          {tabs.map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center px-8 py-4 rounded-full font-montserrat text-xl font-semibold transition-all duration-300 ${activeTab === tab.id ? 'bg-corporate-blue text-white shadow-lg scale-105' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 hover:shadow-lg'}`}>
               <tab.icon className="w-6 h-6 mr-3" />
               {tab.label}
             </button>)}

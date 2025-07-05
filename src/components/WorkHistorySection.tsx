@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star, Quote } from 'lucide-react';
@@ -101,7 +100,7 @@ const WorkHistorySection = () => {
               {[...clients, ...clients].map((client, index) => (
                 <div key={`${client.name}-${index}`} className="flex-shrink-0">
                   <div className="text-center group hover:transform hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden shadow-lg group-hover:shadow-xl border-2 border-gray-100">
+                    <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden shadow-lg group-hover:shadow-xl border-2 border-gray-100">
                       <img 
                         src={client.logo} 
                         alt={client.name}
