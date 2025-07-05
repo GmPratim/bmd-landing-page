@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Home, ChevronDown } from 'lucide-react';
 
@@ -8,6 +8,7 @@ const Navigation = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,17 +95,24 @@ const Navigation = () => {
   };
 
   const handleDropdownEnter = (itemName: string) => {
+    if (dropdownTimeout.current) {
+      clearTimeout(dropdownTimeout.current);
+      dropdownTimeout.current = null;
+    }
     setActiveDropdown(itemName);
   };
 
   const handleDropdownLeave = () => {
-    // Add a small delay to prevent immediate disappearing
-    setTimeout(() => {
+    dropdownTimeout.current = setTimeout(() => {
       setActiveDropdown(null);
     }, 350);
   };
 
   const handleDropdownMouseEnter = () => {
+    if (dropdownTimeout.current) {
+      clearTimeout(dropdownTimeout.current);
+      dropdownTimeout.current = null;
+    }
     // Keep dropdown open when hovering over it
     if (activeDropdown) {
       setActiveDropdown(activeDropdown);
