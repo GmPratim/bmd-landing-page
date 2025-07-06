@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star, Quote } from 'lucide-react';
@@ -6,7 +7,7 @@ const WorkHistorySection = () => {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // ... keep existing code (clients and testimonials data)
+  // ... keep existing code (clients data and testimonials data)
   const clients = [
     { name: 'Google', logo: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=100&h=100&fit=crop' },
     { name: 'Microsoft', logo: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?w=100&h=100&fit=crop' },
@@ -96,11 +97,10 @@ const WorkHistorySection = () => {
               animationPlayState: isPaused ? 'paused' : 'running',
               animationDuration: '30s'
             }}>
-              {/* Double the clients array for seamless loop */}
               {[...clients, ...clients].map((client, index) => (
                 <div key={`${client.name}-${index}`} className="flex-shrink-0">
                   <div className="text-center group hover:transform hover:scale-110 transition-all duration-300">
-                    <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden shadow-lg group-hover:shadow-xl border-2 border-gray-100">
+                    <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden shadow-lg group-hover:shadow-xl border-2 border-gray-100">
                       <img 
                         src={client.logo} 
                         alt={client.name}
@@ -128,6 +128,7 @@ const WorkHistorySection = () => {
             </p>
           </div>
 
+          {/* Testimonials Container with proper spacing and padding */}
           <div className="relative max-w-4xl mx-auto">
             {testimonials.map((testimonial, index) => (
               <Card 
@@ -140,51 +141,63 @@ const WorkHistorySection = () => {
                       : 'opacity-0 translate-x-full scale-95'
                 }`}
               >
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row items-center gap-6">
-                    <div className="flex-shrink-0">
+                  <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <div className="flex flex-col items-center text-center w-full">
+                    {/* Company Logo */}
+                    <div className="flex-shrink-0 mb-4 sm:mb-6">
                       <div className="relative">
                         <img 
                           src={testimonial.logo} 
                           alt={testimonial.company}
-                          className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg"
+                         className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full object-cover border-4 border-white shadow-lg"
                         />
-                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-corporate-blue rounded-full flex items-center justify-center">
-                          <Quote className="h-4 w-4 text-white" />
+                        <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-corporate-blue rounded-full flex items-center justify-center">
+                        <Quote className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 text-center md:text-left">
-                      <p className="text-lg text-gray-700 font-montserrat leading-relaxed mb-6 italic">
+                    
+                    {/* Review Text - with proper mobile spacing */}
+                    <div className="w-full mb-4 sm:mb-6 px-2">
+                      <p className="text-sm sm:text-lg lg:text-xl text-gray-700 font-montserrat leading-relaxed italic break-words hyphens-auto">
                         "{testimonial.text}"
                       </p>
-                      <div className="flex justify-center md:justify-start mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
-                      <div>
-                        <p className="font-bold text-gray-900 font-montserrat text-lg">{testimonial.name}</p>
-                        <p className="text-corporate-blue font-montserrat font-medium">{testimonial.company}</p>
-                      </div>
+                    </div>
+                    
+                    {/* Stars with increased size */}
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 fill-yellow-400 text-yellow-400 mx-0.5 sm:mx-1" />
+                      ))}
+                    </div>
+                    
+                     {/* Name and Company - with proper mobile spacing and text wrapping */}
+                     <div className="space-y-1 sm:space-y-2 w-full">
+                      <p className="font-bold text-gray-900 font-montserrat text-lg sm:text-xl lg:text-2xl break-words">
+                        {testimonial.name}
+                      </p>
+                      <p className="text-corporate-blue font-montserrat font-semibold text-sm sm:text-lg lg:text-xl break-words">
+                        {testimonial.company}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             ))}
-            <div className="h-80"></div>
+             {/* Dynamic height container - adjusted for mobile */}
+             <div className="min-h-[450px] sm:min-h-[400px] lg:min-h-[420px]"></div>
           </div>
 
-          {/* Testimonial Navigation */}
-          <div className="flex justify-center mt-8 gap-3">
+            {/* Testimonial Navigation - properly spaced below card */}
+            <div className="flex justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentTestimonialIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`h-2.5 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentTestimonialIndex 
-                    ? 'bg-corporate-blue w-8' 
-                    : 'bg-gray-300 hover:bg-gray-400'
+                    ? 'bg-corporate-blue w-8 sm:w-10' 
+                    : 'bg-gray-300 hover:bg-gray-400 w-3 sm:w-4'
                 }`}
               />
             ))}
